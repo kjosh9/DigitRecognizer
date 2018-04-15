@@ -10,6 +10,7 @@ def main():
     y = training_set.iloc[:,0].values
     X = training_set.iloc[:,1:].values
 
+    X = X/255
     X = X.reshape(42000, 28, 28, 1)
     y = np_utils.to_categorical(y, 10)
 
