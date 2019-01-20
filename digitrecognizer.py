@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
 from keras.utils import np_utils
 from keras.losses import categorical_crossentropy
-import modelhelper
+import model as m
 
 def create_submission_file(labels, filename='Submission.csv'):
     submission_df = pd.read_csv('sample_submission.csv')
@@ -23,8 +23,11 @@ def main():
 
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.35, random_state=0)
 
-    model = modelhelper.build_model()
-    model.fit(X_train, y_train, epochs=10)
+    model = m.build_model()
+    model.fit(x=X_train,
+              y=y_train,
+              epochs=15,
+              batch_size=128)
 
     y_prediction = model.predict(X_test)
     lss = log_loss(y_test, y_prediction)
