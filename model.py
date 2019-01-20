@@ -3,8 +3,9 @@ from keras.layers import Conv2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
+from keras.layers import Dropout
 
-def build_model(init='uniform', act='relu', opt='adam'):
+def build_model(init='uniform', act='relu', opt='adam', drop_rate=0.15):
 
     classifier = Sequential()
 
@@ -23,11 +24,14 @@ def build_model(init='uniform', act='relu', opt='adam'):
 
     classifier.add(Flatten())
 
-    classifier.add(Dense(units=256, activation=act, kernel_initializer=init))
+    classifier.add(Dense(units=128, activation=act, kernel_initializer=init))
+    classifier.add(Dropout(drop_rate))
 
-    classifier.add(Dense(units=256, activation=act, kernel_initializer=init))
+    classifier.add(Dense(units=128, activation=act, kernel_initializer=init))
+    classifier.add(Dropout(drop_rate))
 
-    classifier.add(Dense(units=256, activation=act, kernel_initializer=init))
+    classifier.add(Dense(units=128, activation=act, kernel_initializer=init))
+    classifier.add(Dropout(drop_rate))
 
     classifier.add(Dense(units=10, activation='softmax'))
 

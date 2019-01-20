@@ -26,7 +26,7 @@ def main():
     model = m.build_model()
     model.fit(x=X_train,
               y=y_train,
-              epochs=15,
+              epochs=20,
               batch_size=128)
 
     y_prediction = model.predict(X_test)
