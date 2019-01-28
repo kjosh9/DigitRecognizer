@@ -21,13 +21,13 @@ def main():
     X = X.reshape(X.shape[0], 28, 28, 1)
     y = np_utils.to_categorical(y, 10)
 
-    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.35, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.25, random_state=0)
 
     model = m.build_model()
     model.fit(x=X_train,
               y=y_train,
-              epochs=35,
-              batch_size=128)
+              epochs=70,
+              batch_size=64)
 
     y_prediction = model.predict(X_test)
     lss = log_loss(y_test, y_prediction)
