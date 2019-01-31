@@ -21,12 +21,12 @@ def main():
     X = X.reshape(X.shape[0], 28, 28, 1)
     y = np_utils.to_categorical(y, 10)
 
-    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.15, random_state=0)
+    X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.125, random_state=0)
 
     model = m.build_model()
     model.fit(x=X_train,
               y=y_train,
-              epochs=85,
+              epochs=100,
               batch_size=32)
 
     y_prediction = model.predict(X_test)
