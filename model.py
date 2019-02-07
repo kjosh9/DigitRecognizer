@@ -12,37 +12,28 @@ from keras.layers import LeakyReLU
 def build_model(init='uniform', act='relu', drop_rate=0.15):
 
     bias_init = RandomUniform(minval=-0.05, maxval=0.05)
-    act = LeakyReLU(alpha=0.1)
+    act = LeakyReLU(alpha=0.01)
 
-    classifier = Sequential()git
+    classifier = Sequential()
 
 
-    classifier.add(Conv2D(filters=20,
-                          kernel_size=(7,7),
+    classifier.add(Conv2D(filters=10,
+                          kernel_size=(8,8),
+                          strides=(1,1),
                           input_shape=(28,28,1),
                           activation=act))
 
-    classifier.add(Conv2D(filters=20,
-                          kernel_size=(7,7),
-                          input_shape=(22,22,20),
+    classifier.add(Conv2D(filters=15,
+                          kernel_size=(6,6),
                           activation=act))
 
     classifier.add(Conv2D(filters=20,
                           kernel_size=(5,5),
-                          input_shape=(16,16,40),
                           activation=act))
 
     classifier.add(Conv2D(filters=20,
                           kernel_size=(5,5),
-                          input_shape=(12,12,60),
                           activation=act))
-
-    classifier.add(Conv2D(filters=20,
-                          kernel_size=(4,4),
-                          input_shape=(11,11,80),
-                          activation=act))
-
-    classifier.add(MaxPooling2D(pool_size=(2,2)))
 
     classifier.add(Flatten())
 

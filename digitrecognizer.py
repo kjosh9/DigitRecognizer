@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
 from keras.utils import np_utils
+from keras.callbacks import EarlyStopping
 from keras.losses import categorical_crossentropy
 import model as m
 
@@ -23,11 +24,16 @@ def main():
 
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.125, random_state=2)
 
+    early_stopping = EarlyStopping(monitor='loss',
+                                   min_delta=.005,
+                                   patience=3)
+
     model = m.build_model()
     model.fit(x=X_train,
               y=y_train,
-              epochs=120,
-              batch_size=32)
+              epochs=100,
+              batch_size=64,
+              callbacks=[early_stopping])
 
     y_prediction = model.predict(X_test)
     lss = log_loss(y_test, y_prediction)
