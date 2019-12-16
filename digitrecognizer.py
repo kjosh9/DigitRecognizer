@@ -2,9 +2,10 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
-from keras.utils import np_utils
-from keras.callbacks import EarlyStopping
-from keras.losses import categorical_crossentropy
+import tensorflow as tf
+from tensorflow.keras.utils import to_categorical 
+from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.losses import categorical_crossentropy
 import model as m
 
 def create_submission_file(labels, filename='Submission.csv'):
@@ -20,24 +21,24 @@ def main():
 
     X = X/255
     X = X.reshape(X.shape[0], 28, 28, 1)
-    y = np_utils.to_categorical(y, 10)
+    y = to_categorical(y, 10)
 
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.125, random_state=2)
 
-    early_stopping = EarlyStopping(monitor='loss',
-                                   min_delta=.005,
-                                   patience=3)
+    early_stopping = EarlyStopping(monitor='acc',
+                                   min_delta=.0005,
+                                   patience=5)
 
     model = m.build_model()
     model.fit(x=X_train,
               y=y_train,
               epochs=100,
-              batch_size=64,
+              batch_size=128,
               callbacks=[early_stopping])
 
     y_prediction = model.predict(X_test)
     lss = log_loss(y_test, y_prediction)
-    print("Loss is: ", lss)
+    print("Validation loss is: ", lss)
 
     test_data = pd.read_csv('test.csv')
     X_submission = test_data.iloc[:,:].values
@@ -48,4 +49,9 @@ def main():
     create_submission_file(y_submission)
 
 if __name__ == '__main__':
+    #print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
+    tf.test.is_gpu_available(
+        cuda_only=False,
+        min_cuda_compute_capability=None
+    )
     main()
