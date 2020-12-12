@@ -39,71 +39,61 @@ def build_model(init='uniform', act='relu', drop_rate=0.15):
 
     classifier.add(Dense(units=256,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=256,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=256,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=128,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=128,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=128,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=128,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=64,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=64,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 
     classifier.add(Dense(units=32,
                          activation=act,
-                         kernel_initializer=init,
-                         bias_initializer=bias_init))
+                         kernel_initializer=init))
     classifier.add(Dropout(drop_rate))
     classifier.add(BatchNormalization())
 

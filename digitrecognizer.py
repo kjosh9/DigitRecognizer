@@ -49,9 +49,7 @@ def main():
     create_submission_file(y_submission)
 
 if __name__ == '__main__':
-    #print("Num GPUs Available: ", len(tf.config.experimental.list_physical_devices('GPU')))
-    tf.test.is_gpu_available(
-        cuda_only=False,
-        min_cuda_compute_capability=None
-    )
+    print("Version: " + tf.__version__)
+    print("CUDA support: " + str(tf.test.is_built_with_cuda))
+    tf.config.list_physical_devices('GPU')
     main()
